@@ -1,6 +1,7 @@
 import pandas as pd   
 import yfinance as yf
 import csv
+import os
 from path_status import check_path, check_data_path
 
 class Stock:
@@ -15,11 +16,25 @@ class Stock:
         df = pd.DataFrame(data=stock_data)
         return df
 
-    def create_directory(self):
+    def create_directory(self, users_path):
+        directory_name = input("Enter the name of directory: ")
+        current_path = os.path.abspath('directory_name')
+        try:
+            # if not os.path.exists(directory_name):
+            #     os.mkdir(directory_name)
+            if os.path.exists(possible_path) == False:
+                os.mkdir(f'{users_path}/{directory_name}')
+                return os.path.abspath(directory_name)
+        except:
+            return os.path.abspath(directory_name)
+
+    def provide_path(self, users_path):
         pass
 
-    def input_to_csv(self):
+    def input_to_csv(self, file_path):
         stock_df = self.get_stock_data()
+        stock_df.to_csv(f'{file_path}/{self.ticker}.csv')
+
         """
         Write to a csv file or xlsx file if the user chooses
 
@@ -34,6 +49,7 @@ class Stock:
         - delete file for stock of choice
 
         """
+        pass
 
 
 
