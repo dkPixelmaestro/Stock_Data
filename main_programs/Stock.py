@@ -15,7 +15,9 @@ class Stock:
         return data_dir
 
     def input_to_csv(self, data, file_path):
-        data.to_csv(f'{file_path}/{self.ticker}.csv')
+        file_csv = f'{self.ticker}.csv'
+        full = os.path.join(file_path, file_csv)
+        data.to_csv(full)
 
     def obtain_data(self, file_path):
         df = pdr.get_data_yahoo(self.ticker, self.start_period, self.end_period)

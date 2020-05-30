@@ -25,8 +25,10 @@ def create_dir(file_path):
         if not os.path.exists(f'{file_path}/{dir_name}'):
             # creates directory on Desktop
             os.mkdir(f'{file_path}/{dir_name}')
-            print(f'{dir_name} has been created. Full path: {file_path}/{dir_name}') 
+            full = os.path.abspath(f'{dir_name}')
+            print(f'{dir_name} has been created. Full path: {full}') 
     except FileExistsError:
+        os.path.abspath(dir_name)
         print(f'{dir_name} already exists on. Current path: {file_path}/{dir_name}')
 
     return f'{file_path}/{dir_name}'
@@ -40,5 +42,8 @@ def check_users_path(users_path):
         print("Provided file path unavailable")
         eval_choice(provide_option())
 
-        
-        
+def double_check_file_path(users_path):
+    if os.path.exists(f'{users_path}'):
+        print("Provided path available")
+    else:
+        print("Provided file path unavailable")
